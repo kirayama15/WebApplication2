@@ -2,7 +2,54 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container container-fluid">
+    <h1>Create Employee</h1>
+    <div class="row">
+        <label>Employee Name</label>
+        <input type="text" id="txtName"/>
+    </div>
+    <div class="row">
+        <label>Birthdate</label>
+        <input type="date" id="txtBirthdate"/>
+    </div>
+    <div class="row">
+        <label>TIN ID</label>
+        <input type="text" id="txtTIN"/>
+    </div>
+    <div class="row">
+        <label>Employee Type</label>
+        <select id="select-empType">
+            <option value="Regular Employee">Regular Employee</option>
+            <option value="Contractual Employee">Contractual Employee</option>
+        </select>
+    </div>
+    <div class="row">
+        <button type="submit" onclick="submitButton()">Create Employee</button>
+    </div>
 </div>
+
+<script>
+    function submitButton() {
+        debugger;
+        var employee = $("#txtName").val();
+        var birthdate = $("#txtBirthdate").val();
+        var tin = $("#txtTIN").val();
+        var empType = $("#select-empType").val();
+        $.ajax({
+            url: '@Url.Action("AddEmployee", "Home")',
+            data: {
+                employeeName: employee,
+                birthdate: birthdate,
+                tin: tin,
+                empType : empType
+            },
+            success: function (data) {
+                alert("Successfully Added" + data);
+            },
+            error: function (err) {
+                alert(err);
+                '@Url.Action("Index","Home")'
+            }
+        });
+    }
+</script>
