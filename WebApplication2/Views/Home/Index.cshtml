@@ -44,7 +44,11 @@
                 empType : empType
             },
             success: function (data) {
-                alert("Successfully Added" + data);
+                $("#txtName").val('')
+                $("#txtBirthdate").val('')
+                $("#txtTIN").val('')
+                
+                alert("Successfully Added " + data);
             },
             error: function (err) {
                 alert(err);
